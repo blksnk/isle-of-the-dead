@@ -156,6 +156,13 @@
     created() {
       this.initSocket();
     },
+    mounted() {
+      setTimeout(() => {
+        document
+          .getElementById('app')
+          .scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 1000);
+    },
   };
 </script>
 
@@ -184,6 +191,7 @@
   body,
   html {
     overflow: hidden;
+    height: 100%;
   }
 
   h3 {
@@ -283,6 +291,8 @@
     #app {
       grid-template-columns: auto auto;
       grid-template-rows: auto 1fr auto 1fr auto;
+      height: 100%;
+      min-height: 100%;
 
       #title {
         grid-column: 1 / -1;
