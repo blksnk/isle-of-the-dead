@@ -121,9 +121,15 @@
         const serverUrl = process.env.VUE_APP_SERVER_URL;
         this.socket = io(serverUrl);
 
+        this.socket.on('lastSlideIndex', ({ index }) => {
+          this.setSlideIndex(index);
+        });
+
         this.socket.on('slideChange', ({ index }) => {
           this.setSlideIndex(index);
         });
+
+        this.socket.emit('getLastSlideIndex');
       },
       setSlideIndex(index) {
         this.slideIndex = index;
