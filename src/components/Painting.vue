@@ -66,20 +66,9 @@
   };
 </script>
 <style lang="scss">
-  @mixin scrollbar {
+  @mixin scrollbar-hide {
     &::-webkit-scrollbar {
-      width: 0.5em;
-      position: absolute;
-    }
-
-    &::-webkit-scrollbar-track {
-      // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-      background: none;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: #212121;
-      outline: none;
+      display: none;
     }
   }
 
@@ -88,15 +77,18 @@
     grid-row: 2 / 2;
     max-height: 100%;
     overflow-y: auto;
-    @include scrollbar;
 
     #revealed {
       transition-duration: 0.6s !important;
       transition-delay: 0.6s;
       height: min-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
 
       img:not(:last-child) {
-        margin-bottom: 1rem;
+        margin-bottom: var(--spacing);
       }
     }
 
@@ -149,5 +141,18 @@
   .fade-enter,
   .fade-leave-to {
     opacity: 0;
+  }
+
+  @media only screen and (min-width: 700px) {
+    #painting {
+      @include scrollbar-hide;
+    }
+  }
+
+  @media only screen and (max-width: 700px) {
+    #painting {
+      grid-column: 1 / -1;
+      grid-row: 2 / 2;
+    }
   }
 </style>

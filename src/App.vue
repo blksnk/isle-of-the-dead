@@ -160,6 +160,17 @@
 </script>
 
 <style lang="scss">
+  @mixin between {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  @mixin border($pos: bottom) {
+    border-#{$pos}: 1px solid #212122;
+    padding-#{$pos}: 0.5rem;
+  }
+
   * {
     padding: 0;
     margin: 0;
@@ -167,6 +178,7 @@
     color: #212122;
     border-color: #212122;
     font-family: 'Space Grotesk', sans-serif;
+    --spacing: 1rem;
   }
 
   body,
@@ -180,7 +192,7 @@
   }
 
   p {
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing);
   }
 
   button,
@@ -191,18 +203,7 @@
   }
 
   ol {
-    padding-left: 2rem;
-  }
-
-  @mixin between {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-  }
-
-  @mixin border($pos: bottom) {
-    border-#{$pos}: 1px solid #212122;
-    padding-#{$pos}: 0.5rem;
+    padding-left: calc(var(--spacing) * 2);
   }
 
   #app {
@@ -214,18 +215,18 @@
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: 6fr 4fr;
-    grid-gap: 1rem;
+    grid-gap: var(--spacing);
     height: 100vh;
     max-height: 100vh;
     width: 100vw;
-    padding: 1rem;
+    padding: var(--spacing);
     overflow: hidden;
 
     #title {
       grid-row: 1 / 1;
       grid-column: 1 / 1;
       border-bottom: 1px solid #212122;
-      padding-bottom: 0.5rem;
+      padding-bottom: calc(var(--spacing) / 2);
       align-self: end;
     }
 
@@ -233,7 +234,7 @@
       grid-row: 1 / 1;
       grid-column: 2 / 2;
       border-bottom: 1px solid #212122;
-      padding-bottom: 0.5rem;
+      padding-bottom: calc(var(--spacing) / 2);
       align-self: end;
     }
 
@@ -266,6 +267,48 @@
       input {
         background: #eeeeee;
         border: 1px solid #212122;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 700px) {
+    * {
+      --spacing: 0.5rem;
+    }
+
+    ol {
+      padding-left: calc(var(--spacing) * 3);
+    }
+
+    #app {
+      grid-template-columns: auto auto;
+      grid-template-rows: auto 1fr auto 1fr auto;
+
+      #title {
+        grid-column: 1 / -1;
+        grid-row: 1 / 1;
+      }
+
+      #sectionTitle {
+        grid-column: 1 / -1;
+        grid-row: 3 / 3;
+      }
+
+      #slides {
+        grid-column: 1 / -1;
+        grid-row: 4 / 4;
+        overflow-y: auto;
+      }
+
+      #credits {
+        display: none;
+      }
+
+      #buttons,
+      #adminLogin,
+      #slideCounter {
+        grid-column: 1 / -1;
+        grid-row: 5 / 5;
       }
     }
   }
