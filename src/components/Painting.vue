@@ -109,8 +109,9 @@
       left: 0;
       top: 0;
       height: 100vh;
+      max-height: 100vh;
       width: 100vw;
-      padding: 1rem;
+      padding: var(--spacing);
       transition-duration: 0.6s;
       display: grid;
       grid-template-rows: 1fr auto;
@@ -129,7 +130,7 @@
         display: flex;
         justify-content: space-between;
         border-top: 1px solid #212122;
-        padding-top: 0.5rem;
+        padding-top: calc(var(--spacing) / 2);
 
         #version {
           text-decoration: underline;
