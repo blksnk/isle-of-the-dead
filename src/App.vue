@@ -290,6 +290,10 @@
       --spacing: 0.5rem;
     }
 
+    h2 {
+      font-size: 1.3rem;
+    }
+
     ol {
       padding-left: calc(var(--spacing) * 3);
     }
