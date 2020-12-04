@@ -67,7 +67,7 @@ export default {
       reveal: false,
       socket: null,
       showAdminLogin: false,
-      isAdmin: true,
+      isAdmin: false,
       slides: [
         {
           title: 'Introduction',
@@ -243,6 +243,10 @@ export default {
   transition-duration: 0.6s;
 }
 
+.fade-enter {
+  transition-delay: 0.6s;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -261,6 +265,10 @@ html {
 
 h2 {
   overflow: hidden;
+
+  &.fade-enter-active {
+    transition-delay: 0.6s;
+  }
 }
 
 h4 {
@@ -274,10 +282,6 @@ h3 {
 
   &:first-child {
     margin-top: 0;
-  }
-
-  &.fade-enter-active {
-    transition-delay: 0.6s;
   }
 }
 
