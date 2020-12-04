@@ -1,7 +1,7 @@
 <template>
   <slide>
     <h3>Muliple versions</h3>
-    <p>5 versions in 6 years</p>
+    <p>5 versions made over 7 years</p>
     <p>To each its own technique, lighting, mood and color palette</p>
 
     <h3>Dimensions</h3>
