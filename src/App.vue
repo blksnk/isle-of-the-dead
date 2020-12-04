@@ -147,11 +147,11 @@ export default {
       this.socket = io(serverUrl);
 
       this.socket.on('lastSlideIndex', ({ index }) => {
-        this.$store.commit('setSlideIndex', index);
+        this.setSlideIndex(index);
       });
 
       this.socket.on('slideChange', ({ index }) => {
-        this.$store.commit('setSlideIndex', index);
+        this.setSlideIndex(index);
       });
 
       this.socket.emit('getLastSlideIndex');
