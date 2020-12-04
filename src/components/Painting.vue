@@ -31,129 +31,124 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'Painting',
-    props: {
-      reveal: {
-        type: Boolean,
-        default: false,
-      },
-      images: Array,
+export default {
+  name: 'Painting',
+  props: {
+    reveal: {
+      type: Boolean,
+      default: false,
     },
-    data() {
-      return {
-        randomIndex: Math.round(Math.random() * 4),
-        expand: false,
-        expandIndex: 0,
-      };
+    images: Array,
+  },
+  data() {
+    return {
+      randomIndex: Math.round(Math.random() * 4),
+      expand: false,
+      expandIndex: 0,
+    };
+  },
+  computed: {
+    randomImage() {
+      return this.images[this.randomIndex];
     },
-    computed: {
-      randomImage() {
-        return this.images[this.randomIndex];
-      },
-      expandedImage() {
-        return this.images[this.expandIndex];
-      },
+    expandedImage() {
+      return this.images[this.expandIndex];
     },
-    methods: {
-      setExpand(bool, i) {
-        if (i !== undefined || i !== null) {
-          this.expandIndex = i;
-        }
-        this.expand = bool;
-      },
+  },
+  methods: {
+    setExpand(bool, i) {
+      if (i !== undefined || i !== null) {
+        this.expandIndex = i;
+      }
+      this.expand = bool;
     },
-  };
+  },
+};
 </script>
 <style lang="scss">
-  @mixin scrollbar-hide {
-    &::-webkit-scrollbar {
-      display: none;
+@mixin scrollbar-hide {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+#painting {
+  grid-column: 1 / 1;
+  grid-row: 2 / 2;
+  max-height: 100%;
+  overflow-y: auto;
+
+  #revealed {
+    transition-duration: 0.6s !important;
+    transition-delay: 0.6s;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    img:not(:last-child) {
+      margin-bottom: var(--spacing);
     }
   }
 
-  #painting {
-    grid-column: 1 / 1;
-    grid-row: 2 / 2;
-    max-height: 100%;
-    overflow-y: auto;
+  #random,
+  #revealed img {
+    width: 100%;
+    cursor: zoom-in;
+    transition-duration: 0.3s;
 
-    #revealed {
-      transition-duration: 0.6s !important;
-      transition-delay: 0.6s;
-      height: min-content;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-
-      img:not(:last-child) {
-        margin-bottom: var(--spacing);
-      }
+    &:hover {
+      transform: scale(0.97);
     }
+  }
 
-    #random,
-    #revealed img {
+  #expand {
+    position: absolute;
+    background-color: #cecece;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    max-height: 100vh;
+    width: 100vw;
+    padding: var(--spacing);
+    transition-duration: 0.6s;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    grid-gap: 1rem;
+
+    img {
+      height: 100%;
       width: 100%;
-      cursor: zoom-in;
-      transition-duration: 0.3s;
-
-      &:hover {
-        transform: scale(0.97);
-      }
+      object-fit: contain;
+      object-position: center center;
+      transition-duration: 0s;
+      cursor: zoom-out;
     }
 
-    #expand {
-      position: absolute;
-      background-color: #cecece;
-      left: 0;
-      top: 0;
-      height: 100vh;
-      max-height: 100vh;
-      width: 100vw;
-      padding: var(--spacing);
-      transition-duration: 0.6s;
-      display: grid;
-      grid-template-rows: 1fr auto;
-      grid-gap: 1rem;
+    #versionInfo {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #212122;
+      padding-top: calc(var(--spacing) / 2);
 
-      img {
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-        object-position: center center;
-        transition-duration: 0s;
-        cursor: zoom-out;
-      }
-
-      #versionInfo {
-        display: flex;
-        justify-content: space-between;
-        border-top: 1px solid #212122;
-        padding-top: calc(var(--spacing) / 2);
-
-        #version {
-          text-decoration: underline;
-        }
+      #version {
+        text-decoration: underline;
       }
     }
   }
+}
 
-  .fade-enter,
-  .fade-leave-to {
-    opacity: 0;
+@media only screen and (min-width: 700px) {
+  #painting {
+    @include scrollbar-hide;
   }
+}
 
-  @media only screen and (min-width: 700px) {
-    #painting {
-      @include scrollbar-hide;
-    }
+@media only screen and (max-width: 700px) {
+  #painting {
+    grid-column: 1 / -1;
+    grid-row: 2 / 2;
   }
-
-  @media only screen and (max-width: 700px) {
-    #painting {
-      grid-column: 1 / -1;
-      grid-row: 2 / 2;
-    }
-  }
+}
 </style>

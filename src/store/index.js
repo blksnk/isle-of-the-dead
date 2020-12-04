@@ -4,8 +4,14 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    slideIndex: 0,
+  },
+  mutations: {
+    setSlideIndex(state, index) {
+      state.slideIndex = index;
+    },
+  },
   actions: {},
   modules: {},
 });
